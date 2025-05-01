@@ -29,27 +29,28 @@
 		"jest": "jest --coverage __tests__/**/*"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.15.7",
-		"@babel/core": "^7.15.8",
-		"@babel/eslint-parser": "^7.15.8",
-		"@babel/plugin-transform-flow-strip-types": "^7.14.5",
-		"@babel/preset-env": "^7.15.8",
-		"@changesets/cli": "^2.27.7",
-		"@svitejs/changesets-changelog-github-compact": "^1.1.0",
-		"babel-jest": "^27.3.1",
-		"eslint": "^7.32.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-flowtype": "^7.0.0",
-		"eslint-plugin-prettier": "^4.0.0",
-		"expect": "^27.3.1",
-		"flow-bin": "^0.137.0",
+		"@babel/cli": "^7.27.1",
+		"@babel/core": "^7.27.1",
+		"@babel/eslint-parser": "^7.27.1",
+		"@babel/plugin-transform-flow-strip-types": "^7.27.1",
+		"@babel/preset-env": "^7.27.1",
+		"@changesets/cli": "^2.29.2",
+		"@svitejs/changesets-changelog-github-compact": "^1.2.0",
+		"ast-types": "^0.14.2",
+		"babel-jest": "^29.7.0",
+		"eslint": "^9.25.1",
+		"eslint-config-prettier": "^10.1.2",
+		"eslint-plugin-flowtype": "^8.0.3",
+		"eslint-plugin-prettier": "^5.2.6",
+		"expect": "^29.7.0",
+		"flow-bin": "^0.269.1",
 		"in-publish": "^2.0.1",
-		"jest": "^27.3.1",
-		"jscodeshift": "^0.13.0",
-		"minimist": "^1.2.5",
-		"object.assign": "^4.1.2",
-		"prettier": "^2.4.1",
-		"rimraf": "^3.0.2",
+		"jest": "^29.7.0",
+		"jscodeshift": "^17.3.0",
+		"minimist": "^1.2.8",
+		"object.assign": "^4.1.7",
+		"prettier": "^3.5.3",
+		"rimraf": "^6.0.1",
 		"safe-publish-latest": "^2.0.0",
 		"to-ast": "^1.0.0"
 	},
@@ -58,12 +59,12 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"@babel/runtime": "^7.15.4",
-		"ast-types-flow": "^0.0.7",
-		"jsx-ast-utils": "^3.2.1"
+		"@babel/runtime": "^7.27.1",
+		"ast-types-flow": "^0.0.8",
+		"jsx-ast-utils": "^3.3.5"
 	},
 	"peerDependencies": {
-		"eslint": "^3 || ^4 || ^5 || ^6 || ^7 || ^8"
+		"eslint": "^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9"
 	},
 	"jest": {
 		"coverageReporters": [
