@@ -1,83 +1,76 @@
 {
-	"name": "eslint-plugin-react-native-a11y",
-	"version": "3.5.1",
-	"description": "React Native specific accessibility linting rules.",
-	"keywords": [
-		"eslint",
-		"eslintplugin",
-		"eslint-plugin",
-		"a11y",
-		"accessibility",
-		"react-native"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/FormidableLabs/eslint-plugin-react-native-a11y"
-	},
-	"main": "lib/index.js",
-	"scripts": {
-		"build": "rimraf lib && babel src --out-dir lib --copy-files",
-		"changeset": "changeset",
-		"create": "node ./scripts/create-rule",
-		"flow": "flow",
-		"lint:fix": "npm run lint -- --fix",
-		"lint": "eslint  --config .eslintrc src __tests__ scripts",
-		"prepublishOnly": "safe-publish-latest && not-in-publish || (npm run lint && npm run flow && npm run jest && npm run build)",
-		"pretest": "npm run lint:fix && npm run flow",
-		"test": "npm run jest",
-		"test:ci": "npm run jest -- --ci --runInBand",
-		"jest": "jest --coverage __tests__/**/*"
-	},
-	"devDependencies": {
-		"@babel/cli": "^7.27.1",
-		"@babel/core": "^7.27.1",
-		"@babel/eslint-parser": "^7.27.1",
-		"@babel/plugin-transform-flow-strip-types": "^7.27.1",
-		"@babel/preset-env": "^7.27.1",
-		"@changesets/cli": "^2.29.2",
-		"@svitejs/changesets-changelog-github-compact": "^1.2.0",
-		"ast-types": "^0.14.2",
-		"babel-jest": "^29.7.0",
-		"eslint": "^9.25.1",
-		"eslint-config-prettier": "^10.1.2",
-		"eslint-plugin-flowtype": "^8.0.3",
-		"eslint-plugin-prettier": "^5.2.6",
-		"expect": "^29.7.0",
-		"flow-bin": "^0.269.1",
-		"in-publish": "^2.0.1",
-		"jest": "^29.7.0",
-		"jscodeshift": "^17.3.0",
-		"minimist": "^1.2.8",
-		"object.assign": "^4.1.7",
-		"prettier": "^3.5.3",
-		"rimraf": "^6.0.1",
-		"safe-publish-latest": "^2.0.0",
-		"to-ast": "^1.0.0"
-	},
-	"engines": {
-		"node": ">=12.0"
-	},
-	"license": "MIT",
-	"dependencies": {
-		"@babel/runtime": "^7.27.1",
-		"ast-types-flow": "^0.0.8",
-		"jsx-ast-utils": "^3.3.5"
-	},
-	"peerDependencies": {
-		"eslint": "^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9"
-	},
-	"jest": {
-		"coverageReporters": [
-			"lcov",
-			"html"
-		],
-		"coverageDirectory": "reports",
-		"roots": [
-			"<rootDir>/__tests__"
-		],
-		"testPathIgnorePatterns": [
-			"<rootDir>/__tests__/__util__"
-		],
-		"testEnvironment": "node"
-	}
+  "name": "eslint-plugin-react-native-a11y",
+  "version": "3.5.1",
+  "description": "React Native specific accessibility linting rules.",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "a11y",
+    "accessibility",
+    "react-native"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FormidableLabs/eslint-plugin-react-native-a11y"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rimraf lib && babel src --out-dir lib --copy-files",
+    "changeset": "changeset",
+    "create": "node ./scripts/create-rule",
+    "lint:fix": "pnpm lint --fix",
+    "lint": "eslint  --config .eslintrc src __tests__ scripts",
+    "prepublishOnly": "safe-publish-latest && not-in-publish || (pnpm lint && pnpm flow && pnpm jest && pnpm build)",
+    "pretest": "pnpm lint:fix && pnpm flow",
+    "test": "pnpm vitest",
+    "test:ci": "pnpm vitest -- --ci --runInBand",
+    "vitest": "vitest --coverage __tests__/**/*"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.2",
+    "@eslint/js": "^9.25.1",
+    "@svitejs/changesets-changelog-github-compact": "^1.2.0",
+    "ast-types": "^0.14.2",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "in-publish": "^2.0.1",
+    "jscodeshift": "^17.3.0",
+    "minimist": "^1.2.8",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "safe-publish-latest": "^2.0.0",
+    "to-ast": "^1.0.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.1",
+    "vite": "^6.3.4",
+    "vitest": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=12.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.27.1",
+    "ast-types-flow": "^0.0.8",
+    "jsx-ast-utils": "^3.3.5"
+  },
+  "peerDependencies": {
+    "eslint": "^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9"
+  },
+  "jest": {
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ],
+    "coverageDirectory": "reports",
+    "roots": [
+      "<rootDir>/__tests__"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/__util__"
+    ],
+    "testEnvironment": "node"
+  }
 }

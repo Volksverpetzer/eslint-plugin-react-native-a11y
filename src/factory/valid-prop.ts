@@ -16,10 +16,10 @@ import isNodePropExpression from '../util/isNodePropExpression';
  */
 const createValidPropRule = (
   propName: string,
-  validValues: Array<string>,
+  validValues: string[],
   errorMessage: string,
-  meta?: Object,
-  create?: Object
+  meta?: object,
+  create?: object
 ) => ({
   meta: {
     docs: {},
@@ -43,16 +43,12 @@ const createValidPropRule = (
                 isOneOf(strValue, validValues)
               );
               invalid = validate.indexOf(false) > -1;
-            } else {
-              invalid = !isOneOf(attrValue, validValues);
-            }
+            } else invalid = !isOneOf(attrValue, validValues);
 
-            if (invalid) {
-              context.report({
+            if (invalid) context.report({
                 node,
                 message: errorMessage,
               });
-            }
           }
         }
       }
