@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-accessibility-hint';
 
 // -----------------------------------------------------------------------------
@@ -39,7 +39,7 @@ ruleTester.run('has-accessibility-hint', rule, {
                 accessibilityHint="Navigates to the previous screen"
               />`,
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: `<TouchableOpacity
@@ -47,5 +47,5 @@ ruleTester.run('has-accessibility-hint', rule, {
               />`,
       errors: [expectedError],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

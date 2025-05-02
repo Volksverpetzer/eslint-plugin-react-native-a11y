@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-valid-accessibility-actions';
 
 // -----------------------------------------------------------------------------
@@ -86,7 +86,7 @@ ruleTester.run('has-valid-accessibility-actions', rule, {
               onAccessibilityAction={this.props.onAccessibilityAction}
             />`,
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: `<View
@@ -220,5 +220,5 @@ ruleTester.run('has-valid-accessibility-actions', rule, {
         },
       ],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

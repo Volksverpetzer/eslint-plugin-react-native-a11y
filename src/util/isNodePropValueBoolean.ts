@@ -1,5 +1,5 @@
 // @flow
-import type { JSXAttribute } from 'ast-types-flow';
+import type { JSXAttribute, JSXExpressionContainer } from 'estree-jsx';
 import isNodePropExpression from './isNodePropExpression';
 
 export default function isattrPropValueBoolean(attr: JSXAttribute): boolean {
@@ -17,13 +17,12 @@ export default function isattrPropValueBoolean(attr: JSXAttribute): boolean {
     // treat these cases as though they are valid
     return true;
   } else {
-    // $FlowFixMe
-    const { expression } = attr.value;
+    const { expression } = attr.value as JSXExpressionContainer;
     if (expression?.type !== 'Literal') {
       // If not a literal, it cannot be a boolean
       return false;
     }
-    // $FlowFixMe
+
     return typeof expression?.value === 'boolean';
   }
 }

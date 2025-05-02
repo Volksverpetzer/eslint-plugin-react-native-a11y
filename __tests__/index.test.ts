@@ -1,44 +1,46 @@
-/* eslint-env jest */
-/* eslint global-require: 0 */
-
-import assert from 'assert';
-import fs from 'fs';
-import path from 'path';
 import plugin from '../src';
+import type { Rule } from 'eslint';
 
-const rules = fs
-  .readdirSync(path.resolve(__dirname, '../src/rules/'))
-  .map((f) => path.basename(f, '.js'));
+const rules = import.meta.glob<true, string, { default: Rule.RuleModule }>(
+  '../src/rules/*.ts',
+  { eager: true },
+);
 
 describe('all rule files should be exported by the plugin', () => {
-  rules.forEach((ruleName) => {
-    it(`should export ${ruleName}`, () => {
-      assert.equal(
-        plugin.rules[ruleName],
-        require(path.join('../src/rules', ruleName)) // eslint-disable-line
+  it.each(Object.entries(rules))(
+    `exports %s`,
+    (rulePath, { default: ruleModule }) => {
+      const ruleName = rulePath.split('/').at(-1)?.replace('.ts', '');
+      expect(plugin.rules[ruleName as keyof typeof plugin.rules]).toEqual(
+        ruleModule,
       );
-    });
-  });
+    },
+  );
 });
 
-describe('configurations', () => {
-  const configs = ['basic', 'ios', 'android', 'all'];
-
-  configs.forEach((name) => {
-    it(`should export a '${name}' configuration`, () => {
-      assert(plugin.configs[name]);
-    });
-  });
+describe('configs', () => {
+  it.each(['basic', 'ios', 'android', 'all'])(
+    `exports a %s config`,
+    (config) => {
+      expect(
+        plugin.configs[config as keyof typeof plugin.configs],
+      ).toBeTruthy();
+    },
+  );
 });
 
 describe('schemas', () => {
-  rules.forEach((ruleName) => {
-    it(`${ruleName} should export a schema with type object`, () => {
-      const rule = require(path.join('../src/rules', ruleName)); // eslint-disable-line
-      const schema = rule.meta && rule.meta.schema && rule.meta.schema[0];
-      const { type } = schema;
+  it.each(
+    Object.entries(rules).filter(([filename]) => !filename.includes('index')),
+  )(
+    `%s exports a schema with type object`,
+    async (_, { default: ruleModule }) => {
+      const schema =
+        ruleModule.meta &&
+        ruleModule.meta.schema &&
+        (ruleModule.meta.schema as { type: string }[])[0];
 
-      assert.deepEqual(type, 'object');
-    });
-  });
+      expect((schema as { type: string }).type).toBe('object');
+    },
+  );
 });

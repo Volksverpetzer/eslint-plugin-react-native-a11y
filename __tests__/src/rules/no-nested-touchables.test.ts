@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/no-nested-touchables';
 
 // -----------------------------------------------------------------------------
@@ -42,7 +42,7 @@ ruleTester.run('no-nested-touchables', rule, {
       accessible={true}
     ><Text>submit</Text><View><Text>cancel</Text></View></TouchableOpacity>`,
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: `<TouchableOpacity
@@ -82,5 +82,5 @@ ruleTester.run('no-nested-touchables', rule, {
 ><Pressable><Text>Nested</Text></Pressable></TouchableOpacity>`,
       errors: [expectedError],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

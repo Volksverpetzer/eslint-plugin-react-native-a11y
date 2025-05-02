@@ -8,7 +8,6 @@
 // Rule Definition
 // ----------------------------------------------------------------------------
 
-import type { JSXOpeningElement } from 'ast-types-flow';
 import {
   hasProp,
   hasAnyProp,
@@ -17,16 +16,13 @@ import {
   getLiteralPropValue,
   elementType,
 } from 'jsx-ast-utils';
-import type { ESLintContext } from '../../flow/eslint';
+import type { Rule } from 'eslint';
 import isTouchable from '../util/isTouchable';
-
-function errorMessage(touchable) {
-  return `<${touchable}> must only have either the accessibilityRole prop or both accessibilityTraits and accessibilityComponentType props set`;
-}
+import type { JSXOpeningElement } from 'estree-jsx';
 
 const deprecatedProps = ['accessibilityTraits', 'accessibilityComponentType'];
 
-module.exports = {
+export default {
   meta: {
     docs: {},
     schema: [
@@ -43,18 +39,18 @@ module.exports = {
     ],
   },
 
-  create: (context: ESLintContext) => ({
+  create: (context: Rule.RuleContext) => ({
     JSXOpeningElement: (node: JSXOpeningElement) => {
       if (
         isTouchable(node, context) &&
         hasAnyProp(node.attributes, deprecatedProps) &&
         (hasProp(node.attributes, 'accessibilityRole') ||
           !hasEveryProp(node.attributes, deprecatedProps)) &&
-        getLiteralPropValue(getProp(node.attributes, 'accessible')) !== false
+        getLiteralPropValue(getProp(node.attributes, 'accessible')!) !== false
       ) {
         context.report({
           node,
-          message: errorMessage(elementType(node)),
+          message: `<${elementType(node)}> must only have either the accessibilityRole prop or both accessibilityTraits and accessibilityComponentType props set`,
         });
       }
     },

@@ -1,5 +1,5 @@
 // @flow
-import type { JSXAttribute } from 'ast-types-flow';
+import type { JSXAttribute, JSXExpressionContainer } from 'estree-jsx';
 
 const ALLOWED_TYPES = [
   'Identifier',
@@ -9,8 +9,7 @@ const ALLOWED_TYPES = [
 ];
 
 export default function isattrPropExpression(attr: JSXAttribute): boolean {
-  // $FlowFixMe
-  const expression = attr.value?.expression;
-  // $FlowFixMe
+  const expression = (attr.value as JSXExpressionContainer)?.expression;
+
   return expression && ALLOWED_TYPES.includes(expression.type);
 }

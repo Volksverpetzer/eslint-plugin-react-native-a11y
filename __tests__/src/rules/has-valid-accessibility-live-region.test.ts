@@ -10,7 +10,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-valid-accessibility-live-region';
 
 // -----------------------------------------------------------------------------
@@ -29,7 +29,7 @@ ruleTester.run('has-valid-accessibility-live-region', rule, {
     { code: '<Text accessibilityLiveRegion="none">Click Me</Text>' },
     { code: '<Text accessibilityLiveRegion="polite">Click Me</Text>' },
     { code: '<Text accessibilityLiveRegion="assertive">Click Me</Text>' },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: '<Text accessibilityLiveRegion >Click Me</Text>',
@@ -51,5 +51,5 @@ ruleTester.run('has-valid-accessibility-live-region', rule, {
       code: '<Text accessibilityLiveRegion="rude">Click Me</Text>',
       errors: [expectedError],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

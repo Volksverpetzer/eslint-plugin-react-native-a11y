@@ -8,9 +8,9 @@
 // Rule Definition
 // ----------------------------------------------------------------------------
 
-import type { JSXOpeningElement } from 'ast-types-flow';
+import type { JSXOpeningElement } from 'estree-jsx';
 import { elementType, hasAnyProp } from 'jsx-ast-utils';
-import type { ESLintContext } from '../../flow/eslint';
+import type { Rule } from 'eslint';
 import isTouchable from '../util/isTouchable';
 import { generateObjSchema } from '../util/schemas';
 
@@ -19,17 +19,17 @@ const errorMessage =
 
 const schema = generateObjSchema();
 
-const hasSpreadProps = (attributes) =>
+const hasSpreadProps = (attributes: JSXOpeningElement['attributes']) =>
   attributes.some((attr) => attr.type === 'JSXSpreadAttribute');
 
-module.exports = {
+export default {
   meta: {
     docs: {},
     schema: [schema],
     fixable: 'code',
   },
 
-  create: (context: ESLintContext) => ({
+  create: (context: Rule.RuleContext) => ({
     JSXOpeningElement: (node: JSXOpeningElement) => {
       if (isTouchable(node, context) || elementType(node) === 'TextInput') {
         if (
@@ -47,11 +47,10 @@ module.exports = {
             message: errorMessage,
             fix: (fixer) => {
               return fixer.insertTextAfterRange(
-                // $FlowFixMe
-                node.name.range,
+                node.name.range as [number, number],
                 isTouchable(node, context)
                   ? ' accessibilityRole="button"'
-                  : ' accessibilityLabel="Text input field"'
+                  : ' accessibilityLabel="Text input field"',
               );
             },
           });

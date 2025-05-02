@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+import * as rules from './rules';
 
 const defaultConfig = {
   parserOptions: {
@@ -32,22 +32,27 @@ const AndroidRules = {
   'react-native-a11y/has-valid-important-for-accessibility': 'error',
 };
 
-module.exports = {
+export default {
   rules: {
-    'has-accessibility-hint': require('./rules/has-accessibility-hint'),
-    'has-accessibility-props': require('./rules/has-accessibility-props'),
-    'has-valid-accessibility-actions': require('./rules/has-valid-accessibility-actions'),
-    'has-valid-accessibility-component-type': require('./rules/has-valid-accessibility-component-type'),
-    'has-valid-accessibility-descriptors': require('./rules/has-valid-accessibility-descriptors'),
-    'has-valid-accessibility-ignores-invert-colors': require('./rules/has-valid-accessibility-ignores-invert-colors'),
-    'has-valid-accessibility-live-region': require('./rules/has-valid-accessibility-live-region'),
-    'has-valid-accessibility-role': require('./rules/has-valid-accessibility-role'),
-    'has-valid-accessibility-state': require('./rules/has-valid-accessibility-state'),
-    'has-valid-accessibility-states': require('./rules/has-valid-accessibility-states'),
-    'has-valid-accessibility-traits': require('./rules/has-valid-accessibility-traits'),
-    'has-valid-accessibility-value': require('./rules/has-valid-accessibility-value'),
-    'has-valid-important-for-accessibility': require('./rules/has-valid-important-for-accessibility'),
-    'no-nested-touchables': require('./rules/no-nested-touchables'),
+    'has-accessibility-hint': rules.hasAccessibilityHint,
+    'has-accessibility-props': rules.hasAccessibilityProps,
+    'has-valid-accessibility-actions': rules.hasValidAccessibilityActions,
+    'has-valid-accessibility-component-type':
+      rules.hasValidAccessibilityComponentType,
+    'has-valid-accessibility-descriptors':
+      rules.hasValidAccessibilityDescriptors,
+    'has-valid-accessibility-ignores-invert-colors':
+      rules.hasValidAccessibilityIgnoresInvertColors,
+    'has-valid-accessibility-live-region':
+      rules.hasValidAccessibilityLiveRegion,
+    'has-valid-accessibility-role': rules.hasValidAccessibilityRole,
+    'has-valid-accessibility-state': rules.hasValidAccessibilityState,
+    'has-valid-accessibility-states': rules.hasValidAccessibilityStates,
+    'has-valid-accessibility-traits': rules.hasValidAccessibilityTraits,
+    'has-valid-accessibility-value': rules.hasValidAccessibilityValue,
+    'has-valid-important-for-accessibility':
+      rules.hasValidImportantForAccessibility,
+    'no-nested-touchables': rules.noNestedTouchables,
   },
   configs: {
     basic: {

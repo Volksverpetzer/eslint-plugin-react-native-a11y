@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-valid-accessibility-role';
 
 // -----------------------------------------------------------------------------
@@ -59,7 +59,7 @@ ruleTester.run('has-valid-accessibility-role', rule, {
               accessibilityRole={props.accessibilityRole ? 'switch' : undefined}
             />`,
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: '<TouchableOpacity accessibilityRole="duck" />',
@@ -77,5 +77,5 @@ ruleTester.run('has-valid-accessibility-role', rule, {
       code: '<TouchableOpacity accessibilityRole="primary-button" />',
       errors: [expectedError],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

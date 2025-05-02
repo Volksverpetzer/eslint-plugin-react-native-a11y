@@ -10,16 +10,18 @@
 
 import { hasProp } from 'jsx-ast-utils';
 import { generateObjSchema } from '../util/schemas';
+import type { Rule } from 'eslint';
+import type { JSXOpeningElement } from 'estree-jsx';
 
 const schema = generateObjSchema();
 
-module.exports = {
+export default {
   meta: {
     docs: {},
     schema: [schema],
   },
 
-  create: (context: ESLintContext) => ({
+  create: (context: Rule.RuleContext) => ({
     JSXOpeningElement: (node: JSXOpeningElement) => {
       if (
         hasProp(node.attributes, 'accessibilityLabel') &&

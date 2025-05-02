@@ -10,8 +10,8 @@
 
 import { generateObjSchema } from '../util/schemas';
 import { elementType, getProp, hasProp } from 'jsx-ast-utils';
-import type { JSXElement } from 'ast-types-flow';
-import type { ESLintContext } from '../../flow/eslint';
+import type { JSXElement, JSXOpeningElement } from 'estree-jsx';
+import type { Rule } from 'eslint';
 import isNodePropValueBoolean from '../util/isNodePropValueBoolean';
 
 const propName = 'accessibilityIgnoresInvertColors';
@@ -19,22 +19,21 @@ const schema = generateObjSchema();
 
 const defaultInvertableComponents = ['Image'];
 
-const hasValidIgnoresInvertColorsProp = ({ attributes }) =>
-  hasProp(attributes, propName) &&
-  isNodePropValueBoolean(getProp(attributes, propName));
+type JSXElementWithParent = JSXElement & { parent: JSXElementWithParent };
 
-const checkParent = ({ openingElement, parent }) => {
-  if (hasValidIgnoresInvertColorsProp(openingElement)) {
-    return false;
-  } else if (parent.openingElement) {
-    return checkParent(parent);
-  }
+const hasValidIgnoresInvertColorsProp = ({ attributes }: JSXOpeningElement) =>
+  hasProp(attributes, propName) &&
+  isNodePropValueBoolean(getProp(attributes, propName)!);
+
+const checkParent = ({ openingElement, parent }: JSXElementWithParent) => {
+  if (hasValidIgnoresInvertColorsProp(openingElement)) return false;
+  if (parent.openingElement) return checkParent(parent);
   return true;
 };
 
 type VerifyRNImageRes = {
-  enableLinting: boolean,
-  elementsToCheck: string[],
+  enableLinting: boolean;
+  elementsToCheck: string[];
 };
 
 /**
@@ -52,15 +51,13 @@ const verifyReactNativeImage = (text: string): VerifyRNImageRes => {
   }
 
   // Flow has issues with String.raw
-  // $FlowFixMe
   const namedSelector = String.raw`(import\s{)(.*)(\bImage\b)(.*)(}\sfrom\s'react-native')`;
-  // $FlowFixMe
   const es6moduleSelector = String.raw`(?<=Image as )(.*?)(?=} from 'react-native')`;
 
   const imageSourceReactNativeRegExp = new RegExp(`${namedSelector}`, 'gs');
   const imageSourceReactNativeAliasRegExp = new RegExp(
     `${es6moduleSelector}`,
-    'gs'
+    'gs',
   );
 
   const matchedImage = text.match(imageSourceReactNativeRegExp) || [];
@@ -76,7 +73,7 @@ const verifyReactNativeImage = (text: string): VerifyRNImageRes => {
   return res;
 };
 
-module.exports = {
+export default {
   meta: {
     docs: {},
     schema: [schema],
@@ -85,11 +82,11 @@ module.exports = {
     verifyReactNativeImage,
   },
 
-  create: ({ options, report, getSourceCode, sourceCode }: ESLintContext) => {
+  create: ({ options, report, sourceCode }: Rule.RuleContext) => {
     /**
      * Checks to see if there are valid imports and if so verifies that those imports related to 'react-native' or if a custom module exists
      * */
-    const { text } = sourceCode || getSourceCode();
+    const { text } = sourceCode;
     const { enableLinting, elementsToCheck } = verifyReactNativeImage(text);
 
     // Add in any other invertible components to check for
@@ -101,18 +98,15 @@ module.exports = {
     }
 
     // Exit process if there is nothing to check
-    if (!enableLinting && options.length === 0) {
-      return {};
-    }
+    if (!enableLinting && options.length === 0) return {};
 
     return {
-      JSXElement: (node: JSXElement) => {
-        // $FlowFixMe
+      JSXElement: (node: JSXElementWithParent) => {
         const { children, openingElement, parent } = node;
 
         if (
           hasProp(openingElement.attributes, propName) &&
-          !isNodePropValueBoolean(getProp(openingElement.attributes, propName))
+          !isNodePropValueBoolean(getProp(openingElement.attributes, propName)!)
         ) {
           report({
             node,
@@ -136,9 +130,7 @@ module.exports = {
           ) {
             let shouldReport = true;
 
-            if (parent.openingElement) {
-              shouldReport = checkParent(parent);
-            }
+            if (parent.openingElement) shouldReport = checkParent(parent);
 
             if (shouldReport) {
               report({

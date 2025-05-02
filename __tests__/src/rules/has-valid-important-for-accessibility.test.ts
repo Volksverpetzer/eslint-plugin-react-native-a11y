@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-valid-important-for-accessibility';
 
 // -----------------------------------------------------------------------------
@@ -32,7 +32,7 @@ ruleTester.run('has-valid-important-for-accessibility', rule, {
     {
       code: '<View importantForAccessibility={isHidden ? "no-hide-descendants" : "yes"} />',
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: '<View importantForAccessibility="" />',
@@ -46,5 +46,5 @@ ruleTester.run('has-valid-important-for-accessibility', rule, {
       code: '<View importantForAccessibility="autoyes" />',
       errors: [expectedError],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

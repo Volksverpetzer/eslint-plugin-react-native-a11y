@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-valid-accessibility-traits';
 
 // -----------------------------------------------------------------------------
@@ -47,7 +47,7 @@ ruleTester.run('has-valid-accessibility-traits', rule, {
     {
       code: '<TouchableOpacity accessibilityTraits={["button", "selected"]} />;',
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: '<TouchableOpacity accessibilityTraits="duck" />',
@@ -65,5 +65,5 @@ ruleTester.run('has-valid-accessibility-traits', rule, {
       code: '<TouchableOpacity accessibilityTraits="primary-button" />',
       errors: [expectedError],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

@@ -4,9 +4,9 @@
  * @flow
  */
 
-import type { JSXOpeningElement } from 'ast-types-flow';
+import type { Rule } from 'eslint';
+import type { JSXOpeningElement } from 'estree-jsx';
 import { elementType } from 'jsx-ast-utils';
-import type { ESLintContext } from '../../flow/eslint';
 
 const defaultTouchables = {
   Touchable: true,
@@ -20,20 +20,10 @@ const defaultTouchables = {
 
 export default function isTouchable(
   element: JSXOpeningElement,
-  context: ESLintContext = {
-    id: '',
-    options: [],
-    report: () => {},
-    getSourceCode: () => ({
-      text: '',
-    }),
-    sourceCode: {
-      text: '',
-    },
-  }
+  context: Rule.RuleContext,
 ) {
   const { options } = context;
-  let extraTouchables = [];
+  let extraTouchables: unknown[] = [];
   if (
     options[0] &&
     Object.prototype.hasOwnProperty.call(options[0], 'touchables')
@@ -42,6 +32,6 @@ export default function isTouchable(
     extraTouchables = [...touchables];
   }
 
-  const elType = elementType(element);
+  const elType = elementType(element) as keyof typeof defaultTouchables;
   return defaultTouchables[elType] || extraTouchables.includes(elType);
 }

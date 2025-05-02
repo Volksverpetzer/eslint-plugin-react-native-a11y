@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-valid-accessibility-component-type';
 
 // -----------------------------------------------------------------------------
@@ -33,7 +33,7 @@ ruleTester.run('has-valid-accessibility-component-type', rule, {
     {
       code: '<TouchableOpacity accessibilityComponentType="radiobutton_unchecked" />;',
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: '<TouchableOpacity accessibilityComponentType="duck" />',
@@ -51,5 +51,5 @@ ruleTester.run('has-valid-accessibility-component-type', rule, {
       code: '<TouchableOpacity accessibilityComponentType="primary-button" />',
       errors: [expectedError],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-react-native-a11y",
-  "version": "3.5.1",
+  "version": "4.0.0",
   "description": "React Native specific accessibility linting rules.",
   "keywords": [
     "eslint",
@@ -14,27 +14,43 @@
     "type": "git",
     "url": "https://github.com/FormidableLabs/eslint-plugin-react-native-a11y"
   },
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./flat": {
+      "types": "./dist/flat.d.ts",
+      "default": "./dist/flat.js"
+    }
+  },
   "scripts": {
-    "build": "rimraf lib && babel src --out-dir lib --copy-files",
+    "build": "tsc --project ./tsconfig.build.json",
     "changeset": "changeset",
     "create": "node ./scripts/create-rule",
-    "lint:fix": "pnpm lint --fix",
-    "lint": "eslint  --config .eslintrc src __tests__ scripts",
-    "prepublishOnly": "safe-publish-latest && not-in-publish || (pnpm lint && pnpm flow && pnpm jest && pnpm build)",
-    "pretest": "pnpm lint:fix && pnpm flow",
-    "test": "pnpm vitest",
-    "test:ci": "pnpm vitest -- --ci --runInBand",
-    "vitest": "vitest --coverage __tests__/**/*"
+    "lint:fix": "eslint --fix",
+    "lint": "eslint",
+    "prepublishOnly": "safe-publish-latest && not-in-publish || (pnpm lint && pnpm test && pnpm build)",
+    "pretest": "pnpm lint:fix",
+    "test": "vitest --ui",
+    "test:ci": "vitest --coverage --run --runInBand"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.2",
+    "@eslint/compat": "^1.2.9",
     "@eslint/js": "^9.25.1",
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
-    "ast-types": "^0.14.2",
+    "@types/eslint": "^9.6.1",
+    "@types/estree-jsx": "^1.0.5",
+    "@types/jsx-ast-utils": "^3.3.1",
+    "@types/node": "^22.15.3",
+    "@vitest/ui": "^3.1.2",
+    "deepmerge": "^4.3.1",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
     "in-publish": "^2.0.1",
     "jscodeshift": "^17.3.0",
     "minimist": "^1.2.8",
@@ -53,24 +69,9 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.27.1",
-    "ast-types-flow": "^0.0.8",
     "jsx-ast-utils": "^3.3.5"
   },
   "peerDependencies": {
     "eslint": "^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9"
-  },
-  "jest": {
-    "coverageReporters": [
-      "lcov",
-      "html"
-    ],
-    "coverageDirectory": "reports",
-    "roots": [
-      "<rootDir>/__tests__"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/__tests__/__util__"
-    ],
-    "testEnvironment": "node"
   }
 }

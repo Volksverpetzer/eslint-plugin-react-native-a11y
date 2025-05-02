@@ -32,8 +32,8 @@ const validValues = [
   'pageTurn',
 ];
 
-module.exports = createValidPropRule(
+export default createValidPropRule(
   'accessibilityTraits',
   validValues,
-  errorMessage
+  errorMessage,
 );

@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-valid-accessibility-states';
 
 // -----------------------------------------------------------------------------
@@ -41,7 +41,7 @@ ruleTester.run('has-valid-accessibility-states', rule, {
     {
       code: '<TouchableHighlight accessibilityStates={props.disabled ? ["disabled"]: []} />',
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: '<TouchableOpacity accessibilityStates="enabled" />',
@@ -55,5 +55,5 @@ ruleTester.run('has-valid-accessibility-states', rule, {
       code: '<TouchableOpacity accessibilityStates="primary-button" />',
       errors: [expectedError],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

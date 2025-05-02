@@ -19,8 +19,8 @@ const validValues = [
   'radiobutton_unchecked',
 ];
 
-module.exports = createValidPropRule(
+export default createValidPropRule(
   'accessibilityComponentType',
   validValues,
-  errorMessage
+  errorMessage,
 );

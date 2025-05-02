@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-valid-accessibility-descriptors';
 
 // -----------------------------------------------------------------------------
@@ -79,7 +79,7 @@ ruleTester.run('has-valid-accessibility-descriptors', rule, {
     {
       code: `<TouchableBounce {...props} hostRef={hostRef} />`,
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: `<TouchableOpacity>
@@ -95,5 +95,5 @@ ruleTester.run('has-valid-accessibility-descriptors', rule, {
       errors: [expectedError],
       output: `<TextInput accessibilityLabel="Text input field" />`,
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

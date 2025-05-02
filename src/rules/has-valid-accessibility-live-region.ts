@@ -15,8 +15,8 @@ const errorMessage = 'accessibilityLiveRegion must be one of defined values';
 
 const validValues = ['none', 'polite', 'assertive'];
 
-module.exports = createValidPropRule(
+export default createValidPropRule(
   'accessibilityLiveRegion',
   validValues,
-  errorMessage
+  errorMessage,
 );

@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-valid-accessibility-value';
 
 // -----------------------------------------------------------------------------
@@ -43,7 +43,7 @@ ruleTester.run('has-valid-accessibility-value', rule, {
                 text: this.props.text
               }} />`,
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: '<TouchableOpacity accessibilityValue={{ min: 0, now: 50, max: 100, text: "foo" }} />',
@@ -103,5 +103,5 @@ ruleTester.run('has-valid-accessibility-value', rule, {
         },
       ],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

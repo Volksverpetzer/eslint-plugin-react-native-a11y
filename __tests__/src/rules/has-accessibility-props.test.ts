@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 import { RuleTester } from 'eslint';
-import parserOptionsMapper from '../../__util__/parserOptionsMapper';
+import languageOptionsMapper from '../../__util__/languageOptionsMapper';
 import rule from '../../../src/rules/has-accessibility-props';
 
 // -----------------------------------------------------------------------------
@@ -18,7 +18,7 @@ import rule from '../../../src/rules/has-accessibility-props';
 
 const ruleTester = new RuleTester();
 
-const expectedError = (touchable) => ({
+const expectedError = (touchable: string) => ({
   message: `<${touchable}> must only have either the accessibilityRole prop or both accessibilityTraits and accessibilityComponentType props set`,
   type: 'JSXOpeningElement',
 });
@@ -68,9 +68,6 @@ ruleTester.run('has-accessibility-props', rule, {
       code: '<TouchableWithoutFeedback />;',
     },
     {
-      code: '<TouchableNativeFeedback />;',
-    },
-    {
       code: '<div><TouchableOpacity /></div>;',
     },
     {
@@ -92,7 +89,7 @@ ruleTester.run('has-accessibility-props', rule, {
         },
       ],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
   invalid: [
     {
       code: '<TouchableOpacity accessibilityTraits="none"/>;',
@@ -107,20 +104,8 @@ ruleTester.run('has-accessibility-props', rule, {
       errors: [expectedError('TouchableHighlight')],
     },
     {
-      code: '<TouchableHighlight accessibilityComponentType="none"/>;',
-      errors: [expectedError('TouchableHighlight')],
-    },
-    {
       code: '<TouchableWithoutFeedback accessibilityComponentType="none"/>;',
       errors: [expectedError('TouchableWithoutFeedback')],
-    },
-    {
-      code: '<TouchableWithoutFeedback accessibilityComponentType="none"/>;',
-      errors: [expectedError('TouchableWithoutFeedback')],
-    },
-    {
-      code: '<TouchableNativeFeedback accessibilityComponentType="none"/>;',
-      errors: [expectedError('TouchableNativeFeedback')],
     },
     {
       code: '<TouchableNativeFeedback accessibilityComponentType="none"/>;',
@@ -138,5 +123,5 @@ ruleTester.run('has-accessibility-props', rule, {
       code: '<TouchableOpacity accessibilityRole="none" accessibilityComponentType="none" accessibilityTraits="none" />;',
       errors: [expectedError('TouchableOpacity')],
     },
-  ].map(parserOptionsMapper),
+  ].map(languageOptionsMapper),
 });

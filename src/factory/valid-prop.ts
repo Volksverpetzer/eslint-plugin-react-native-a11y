@@ -1,11 +1,11 @@
 // @flow
 
-import type { JSXAttribute } from 'ast-types-flow';
 import { elementType, getLiteralPropValue } from 'jsx-ast-utils';
 import { generateObjSchema } from '../util/schemas';
-import type { ESLintContext } from '../../flow/eslint';
 import isOneOf from '../util/isOneOf';
 import isNodePropExpression from '../util/isNodePropExpression';
+import { type Rule } from 'eslint';
+import type { JSXAttribute, JSXOpeningElement } from 'estree-jsx';
 
 /**
  * Produces an ESLint rule that validates a prop against an array of acceptable values
@@ -19,7 +19,7 @@ const createValidPropRule = (
   validValues: string[],
   errorMessage: string,
   meta?: object,
-  create?: object
+  create?: object,
 ) => ({
   meta: {
     docs: {},
@@ -27,29 +27,29 @@ const createValidPropRule = (
     ...meta,
   },
 
-  create: (context: ESLintContext) => ({
-    JSXAttribute: (node: JSXAttribute) => {
-      const attrName = elementType(node);
+  create: (context: Rule.RuleContext) => ({
+    JSXAttribute: (node: JSXAttribute | JSXOpeningElement) => {
+      const attrName = elementType(node as JSXOpeningElement);
       if (attrName === propName) {
-        const isExpression = isNodePropExpression(node);
+        const isExpression = isNodePropExpression(node as JSXAttribute);
         if (!isExpression) {
           // ensure we are only checking literal prop values
-          const attrValue = getLiteralPropValue(node);
-          if (attrValue !== null) {
-            let invalid = false;
+          const attrValue = getLiteralPropValue(<JSXAttribute>node);
+          if (attrValue == null) return;
+          let invalid = false;
 
-            if (Array.isArray(attrValue)) {
-              const validate = attrValue.map((strValue) =>
-                isOneOf(strValue, validValues)
-              );
-              invalid = validate.indexOf(false) > -1;
-            } else invalid = !isOneOf(attrValue, validValues);
+          if (Array.isArray(attrValue)) {
+            const validate = attrValue.map((strValue) =>
+              isOneOf(strValue, validValues),
+            );
+            invalid = validate.indexOf(false) > -1;
+          } else invalid = !isOneOf(attrValue?.toString(), validValues);
 
-            if (invalid) context.report({
-                node,
-                message: errorMessage,
-              });
-          }
+          if (invalid)
+            context.report({
+              node,
+              message: errorMessage,
+            });
         }
       }
     },
