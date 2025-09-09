@@ -63,7 +63,7 @@ export default {
 
             properties.forEach(({ key, value }) => {
               if (
-                (key as unknown as PrivateIdentifier).name === 'text' &&
+                (key as PrivateIdentifier).name === 'text' &&
                 value.type === 'Literal' &&
                 typeof value.value !== 'string'
               )
