@@ -107,20 +107,8 @@ ruleTester.run('has-accessibility-props', rule, {
       errors: [expectedError('TouchableHighlight')],
     },
     {
-      code: '<TouchableHighlight accessibilityComponentType="none"/>;',
-      errors: [expectedError('TouchableHighlight')],
-    },
-    {
       code: '<TouchableWithoutFeedback accessibilityComponentType="none"/>;',
       errors: [expectedError('TouchableWithoutFeedback')],
-    },
-    {
-      code: '<TouchableWithoutFeedback accessibilityComponentType="none"/>;',
-      errors: [expectedError('TouchableWithoutFeedback')],
-    },
-    {
-      code: '<TouchableNativeFeedback accessibilityComponentType="none"/>;',
-      errors: [expectedError('TouchableNativeFeedback')],
     },
     {
       code: '<TouchableNativeFeedback accessibilityComponentType="none"/>;',

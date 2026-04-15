@@ -79,7 +79,7 @@ const validCustomImportTests = [
                   <Image />
                 </View>
               );`,
-    parserOptions: {
+    languageOptions: {
       sourceType: 'module',
     },
   },
@@ -150,7 +150,7 @@ const invalidCustomImport = [
         invertableComponents: ['FastImage'],
       },
     ],
-    parserOptions: {
+    languageOptions: {
       sourceType: 'module',
     },
   },
@@ -178,7 +178,7 @@ const invalidCustomImport = [
         invertableComponents: ['FastImage'],
       },
     ],
-    parserOptions: {
+    languageOptions: {
       sourceType: 'module',
     },
   },
@@ -216,7 +216,7 @@ const invalidCustomImport = [
         invertableComponents: ['FastImage'],
       },
     ],
-    parserOptions: {
+    languageOptions: {
       sourceType: 'module',
     },
   },
@@ -228,7 +228,7 @@ const invalidCustomImport = [
     export const RNImage = (props) => <Image source={props.source} />
     `,
     errors: [missingPropError],
-    parserOptions: {
+    languageOptions: {
       sourceType: 'module',
     },
   },
@@ -245,7 +245,7 @@ const invalidCustomImport = [
   );
   `,
     errors: [missingPropError, typeError],
-    parserOptions: {
+    languageOptions: {
       sourceType: 'module',
     },
     options: [

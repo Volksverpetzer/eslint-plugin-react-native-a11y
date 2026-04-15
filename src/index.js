@@ -1,14 +1,5 @@
 /* eslint-disable global-require */
 
-const defaultConfig = {
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
-  plugins: ['react-native-a11y'],
-};
-
 const basicRules = {
   'react-native-a11y/has-accessibility-hint': 'error',
   'react-native-a11y/has-accessibility-props': 'error',
@@ -32,7 +23,11 @@ const AndroidRules = {
   'react-native-a11y/has-valid-important-for-accessibility': 'error',
 };
 
-module.exports = {
+const plugin = {
+  meta: {
+    name: 'eslint-plugin-react-native-a11y',
+    version: '3.5.1',
+  },
   rules: {
     'has-accessibility-hint': require('./rules/has-accessibility-hint'),
     'has-accessibility-props': require('./rules/has-accessibility-props'),
@@ -49,32 +44,82 @@ module.exports = {
     'has-valid-important-for-accessibility': require('./rules/has-valid-important-for-accessibility'),
     'no-nested-touchables': require('./rules/no-nested-touchables'),
   },
-  configs: {
-    basic: {
-      ...defaultConfig,
-      rules: basicRules,
-    },
-    ios: {
-      ...defaultConfig,
-      rules: {
-        ...basicRules,
-        ...iOSRules,
-      },
-    },
-    android: {
-      ...defaultConfig,
-      rules: {
-        ...basicRules,
-        ...AndroidRules,
-      },
-    },
-    all: {
-      ...defaultConfig,
-      rules: {
-        ...basicRules,
-        ...iOSRules,
-        ...AndroidRules,
-      },
+  configs: {},
+};
+
+// Legacy configs (ESLint 8 and below, .eslintrc format)
+const legacyDefaultConfig = {
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
     },
   },
+  plugins: ['react-native-a11y'],
 };
+
+plugin.configs = {
+  // Legacy configs for ESLint 8 and below
+  basic: {
+    ...legacyDefaultConfig,
+    rules: basicRules,
+  },
+  ios: {
+    ...legacyDefaultConfig,
+    rules: {
+      ...basicRules,
+      ...iOSRules,
+    },
+  },
+  android: {
+    ...legacyDefaultConfig,
+    rules: {
+      ...basicRules,
+      ...AndroidRules,
+    },
+  },
+  all: {
+    ...legacyDefaultConfig,
+    rules: {
+      ...basicRules,
+      ...iOSRules,
+      ...AndroidRules,
+    },
+  },
+  // Flat configs for ESLint 9+ (eslint.config.js format)
+  'flat/basic': [
+    {
+      plugins: { 'react-native-a11y': plugin },
+      rules: basicRules,
+    },
+  ],
+  'flat/ios': [
+    {
+      plugins: { 'react-native-a11y': plugin },
+      rules: {
+        ...basicRules,
+        ...iOSRules,
+      },
+    },
+  ],
+  'flat/android': [
+    {
+      plugins: { 'react-native-a11y': plugin },
+      rules: {
+        ...basicRules,
+        ...AndroidRules,
+      },
+    },
+  ],
+  'flat/all': [
+    {
+      plugins: { 'react-native-a11y': plugin },
+      rules: {
+        ...basicRules,
+        ...iOSRules,
+        ...AndroidRules,
+      },
+    },
+  ],
+};
+
+module.exports = plugin;

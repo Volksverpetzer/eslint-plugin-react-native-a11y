@@ -22,12 +22,28 @@ describe('all rule files should be exported by the plugin', () => {
 });
 
 describe('configurations', () => {
-  const configs = ['basic', 'ios', 'android', 'all'];
+  const legacyConfigs = ['basic', 'ios', 'android', 'all'];
+  const flatConfigs = ['flat/basic', 'flat/ios', 'flat/android', 'flat/all'];
 
-  configs.forEach((name) => {
-    it(`should export a '${name}' configuration`, () => {
+  legacyConfigs.forEach((name) => {
+    it(`should export a '${name}' legacy configuration`, () => {
       assert(plugin.configs[name]);
     });
+  });
+
+  flatConfigs.forEach((name) => {
+    it(`should export a '${name}' flat configuration`, () => {
+      assert(plugin.configs[name]);
+      assert(Array.isArray(plugin.configs[name]));
+    });
+  });
+});
+
+describe('meta', () => {
+  it('should export plugin meta with name and version', () => {
+    assert(plugin.meta);
+    assert.equal(typeof plugin.meta.name, 'string');
+    assert.equal(typeof plugin.meta.version, 'string');
   });
 });
 
