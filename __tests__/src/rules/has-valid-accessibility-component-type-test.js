@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview Enforce accessibilityComponentType property value is valid
  * @author Alex Saunders

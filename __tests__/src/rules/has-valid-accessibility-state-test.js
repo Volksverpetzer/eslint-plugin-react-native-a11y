@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview Describes the current state of a component to the user of an assistive technology.
  * @author JP Driver

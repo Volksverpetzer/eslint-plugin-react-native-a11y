@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not apparent from the accessibility label.
  * @author JP Driver

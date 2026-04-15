@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview $DESCRIPTION
  * @author $AUTHOR

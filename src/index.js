@@ -1,5 +1,3 @@
-/* eslint-disable global-require */
-
 const basicRules = {
   'react-native-a11y/has-accessibility-hint': 'error',
   'react-native-a11y/has-accessibility-props': 'error',

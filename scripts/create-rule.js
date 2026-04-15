@@ -55,7 +55,7 @@ exec(
   ].join(' '),
   (error) => {
     if (error) {
-      console.error(`exec error: ${error}`); // eslint-disable-line no-console
+      console.error(`exec error: ${error}`);
     }
   }
 );

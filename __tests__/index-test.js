@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /* eslint global-require: 0 */
 
 import assert from 'assert';
@@ -15,7 +14,7 @@ describe('all rule files should be exported by the plugin', () => {
     it(`should export ${ruleName}`, () => {
       assert.equal(
         plugin.rules[ruleName],
-        require(path.join('../src/rules', ruleName)) // eslint-disable-line
+        require(path.join('../src/rules', ruleName))
       );
     });
   });
@@ -50,7 +49,7 @@ describe('meta', () => {
 describe('schemas', () => {
   rules.forEach((ruleName) => {
     it(`${ruleName} should export a schema with type object`, () => {
-      const rule = require(path.join('../src/rules', ruleName)); // eslint-disable-line
+      const rule = require(path.join('../src/rules', ruleName));
       const schema = rule.meta && rule.meta.schema && rule.meta.schema[0];
       const { type } = schema;
 

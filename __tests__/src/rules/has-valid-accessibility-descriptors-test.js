@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview Ensures that Touchable* components have appropriate props to communicate with assistive technologies
  * @author JP Driver

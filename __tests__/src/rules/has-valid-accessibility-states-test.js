@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview Used to tell Talkback or Voiceover the state a UI Element is in
  * @author Jen Luker

@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview Allow an assistive technology to programmatically invoke the actions of a component.
  * @author JP Driver

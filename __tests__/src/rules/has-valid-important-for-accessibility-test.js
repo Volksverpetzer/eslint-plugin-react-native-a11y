@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview Enforce importantForAccessibility property value is valid
  * @author Alex Saunders

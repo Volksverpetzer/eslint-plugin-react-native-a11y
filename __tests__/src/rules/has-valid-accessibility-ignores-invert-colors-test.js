@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview Ensure that accessibilityIgnoresInvertColors property value is a boolean.
  * @author Dominic Coelho

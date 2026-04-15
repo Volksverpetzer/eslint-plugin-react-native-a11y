@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview Represents the current value of a component.
  * @author JP Driver

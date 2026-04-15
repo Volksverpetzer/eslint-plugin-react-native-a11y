@@ -1,4 +1,3 @@
-/* eslint-env jest */
 /**
  * @fileoverview Enforce if a view has accessible={true}, that there are no clickable elements inside
  * @author Alex Saunders
