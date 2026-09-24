@@ -15,17 +15,17 @@ Before starting, check you already have ESLint as a `devDependency` of your proj
 
 ### Installation
 
-Next, install `eslint-plugin-react-native-a11y`:
+Next, install `@volksverpetzer/eslint-plugin-react-native-a11y`:
 
 ```sh
-npm install eslint-plugin-react-native-a11y --save-dev
+npm install @volksverpetzer/eslint-plugin-react-native-a11y --save-dev
 
 # or
 
-yarn add eslint-plugin-react-native-a11y --dev
+yarn add @volksverpetzer/eslint-plugin-react-native-a11y --dev
 ```
 
-**Note:** If you installed ESLint globally (using the `-g` flag in npm, or the `global` prefix in yarn) then you must also install `eslint-plugin-react-native-a11y` globally.
+**Note:** If you installed ESLint globally (using the `-g` flag in npm, or the `global` prefix in yarn) then you must also install `@volksverpetzer/eslint-plugin-react-native-a11y` globally.
 
 ## Configuration
 
@@ -76,7 +76,7 @@ ESLint v9 and v10 use the [flat config](https://eslint.org/docs/latest/use/confi
 ```js
 // eslint.config.js
 
-const reactNativeA11y = require('eslint-plugin-react-native-a11y');
+const reactNativeA11y = require('@volksverpetzer/eslint-plugin-react-native-a11y');
 
 module.exports = [reactNativeA11y.configs.flat.ios];
 ```
