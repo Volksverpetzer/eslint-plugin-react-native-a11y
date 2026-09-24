@@ -1,5 +1,15 @@
 # Changes
 
+## 3.6.0
+
+### Minor Changes
+
+- Add support for ESLint v10. `peerDependencies` now allows ESLint v9 and v10, and the plugin exports flat configs (`configs.flat.basic`, `configs.flat.ios`, `configs.flat.android`, `configs.flat.all`) for use with ESLint's flat config system, which ESLint v10 requires. The legacy eslintrc-style configs (`configs.basic`, `configs.ios`, `configs.android`, `configs.all`) are unchanged for consumers still on ESLint <= 8. ([#6](https://github.com/Volksverpetzer/eslint-plugin-react-native-a11y/pull/6))
+
+### Patch Changes
+
+- Publish this fork under the `@volksverpetzer/eslint-plugin-react-native-a11y` scoped package name, so it can be installed and updated independently while the ESLint v10 support PR upstream is pending review. ([#8](https://github.com/Volksverpetzer/eslint-plugin-react-native-a11y/pull/8))
+
 ## 3.5.1
 
 ### Patch Changes
