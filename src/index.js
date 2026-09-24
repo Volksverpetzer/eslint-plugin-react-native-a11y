@@ -6,30 +6,35 @@ const defaultConfig = {
       jsx: true,
     },
   },
-  plugins: ['react-native-a11y'],
+  plugins: ['@volksverpetzer/react-native-a11y'],
 };
 
 const basicRules = {
-  'react-native-a11y/has-accessibility-hint': 'error',
-  'react-native-a11y/has-accessibility-props': 'error',
-  'react-native-a11y/has-valid-accessibility-actions': 'error',
-  'react-native-a11y/has-valid-accessibility-component-type': 'error',
-  'react-native-a11y/has-valid-accessibility-descriptors': 'error',
-  'react-native-a11y/has-valid-accessibility-role': 'error',
-  'react-native-a11y/has-valid-accessibility-state': 'error',
-  'react-native-a11y/has-valid-accessibility-states': 'error',
-  'react-native-a11y/has-valid-accessibility-traits': 'error',
-  'react-native-a11y/has-valid-accessibility-value': 'error',
-  'react-native-a11y/no-nested-touchables': 'error',
+  '@volksverpetzer/react-native-a11y/has-accessibility-hint': 'error',
+  '@volksverpetzer/react-native-a11y/has-accessibility-props': 'error',
+  '@volksverpetzer/react-native-a11y/has-valid-accessibility-actions': 'error',
+  '@volksverpetzer/react-native-a11y/has-valid-accessibility-component-type':
+    'error',
+  '@volksverpetzer/react-native-a11y/has-valid-accessibility-descriptors':
+    'error',
+  '@volksverpetzer/react-native-a11y/has-valid-accessibility-role': 'error',
+  '@volksverpetzer/react-native-a11y/has-valid-accessibility-state': 'error',
+  '@volksverpetzer/react-native-a11y/has-valid-accessibility-states': 'error',
+  '@volksverpetzer/react-native-a11y/has-valid-accessibility-traits': 'error',
+  '@volksverpetzer/react-native-a11y/has-valid-accessibility-value': 'error',
+  '@volksverpetzer/react-native-a11y/no-nested-touchables': 'error',
 };
 
 const iOSRules = {
-  'react-native-a11y/has-valid-accessibility-ignores-invert-colors': 'error',
+  '@volksverpetzer/react-native-a11y/has-valid-accessibility-ignores-invert-colors':
+    'error',
 };
 
 const AndroidRules = {
-  'react-native-a11y/has-valid-accessibility-live-region': 'error',
-  'react-native-a11y/has-valid-important-for-accessibility': 'error',
+  '@volksverpetzer/react-native-a11y/has-valid-accessibility-live-region':
+    'error',
+  '@volksverpetzer/react-native-a11y/has-valid-important-for-accessibility':
+    'error',
 };
 
 const rules = {
@@ -61,7 +66,7 @@ const plugin = {
 // eslintrc format entirely) needs the plugin object itself rather than a
 // plugin name string, and `languageOptions` instead of `parserOptions`.
 const flatDefaultConfig = {
-  plugins: { 'react-native-a11y': plugin },
+  plugins: { '@volksverpetzer/react-native-a11y': plugin },
   languageOptions: {
     parserOptions: {
       ecmaFeatures: {
