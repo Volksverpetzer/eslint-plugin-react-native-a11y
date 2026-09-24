@@ -3,9 +3,9 @@
   "changelog": [
     "@svitejs/changesets-changelog-github-compact",
     {
-      "repo": "FormidableLabs/eslint-plugin-react-native-a11y"
+      "repo": "Volksverpetzer/eslint-plugin-react-native-a11y"
     }
   ],
   "access": "public",
-  "baseBranch": "master"
+  "baseBranch": "main"
 }
