@@ -42,14 +42,14 @@ If your project only supports a single platform, you may get the best experience
 
 > If you are unsure which one to use, in most cases `all` can be safely used.
 
-Add the config you want to use to the `extends` section of your ESLint config using the pattern `plugin:react-native-a11y/` followed by your config name, as shown below:
+Add the config you want to use to the `extends` section of your ESLint config using the pattern `plugin:@volksverpetzer/react-native-a11y/` followed by your config name, as shown below:
 
 ```js
 // .eslintrc.js
 
 module.exports = {
   root: true,
-  extends: ['@react-native-community', 'plugin:react-native-a11y/ios'],
+  extends: ['@react-native-community', 'plugin:@volksverpetzer/react-native-a11y/ios'],
 };
 ```
 
@@ -62,7 +62,7 @@ module.exports = {
   root: true,
   extends: ['@react-native-community'],
   rules: {
-    'react-native-a11y/rule-name': 2,
+    '@volksverpetzer/react-native-a11y/rule-name': 2,
   },
 };
 ```
@@ -114,10 +114,10 @@ The following options are available to customize the recommended rule set.
 
 #### Custom Touchables
 
-`react-native-a11y/has-accessibility-props` and `react-native-a11y/no-nested-touchables` allow you to define an array of names for custom components that you may have that conform to the same accessibility interfaces as Touchables.
+`@volksverpetzer/react-native-a11y/has-accessibility-props` and `@volksverpetzer/react-native-a11y/no-nested-touchables` allow you to define an array of names for custom components that you may have that conform to the same accessibility interfaces as Touchables.
 
 ```js
-"react-native-a11y/has-accessibility-props": [
+"@volksverpetzer/react-native-a11y/has-accessibility-props": [
   "error",
   {
     "touchables": ["TouchableCustom"]
@@ -127,12 +127,12 @@ The following options are available to customize the recommended rule set.
 
 #### Custom Invertable Components (iOS)
 
-`react-native-a11y/has-valid-accessibility-ignores-invert-colors` allows you to optionally define an Array of component names to check in addition to `<Image />`.
+`@volksverpetzer/react-native-a11y/has-valid-accessibility-ignores-invert-colors` allows you to optionally define an Array of component names to check in addition to `<Image />`.
 
 For more information, see the [rule docs](docs/has-valid-accessibility-ignores-invert-colors.md#rule-details).
 
 ```js
-"react-native-a11y/has-valid-accessibility-ignores-invert-colors": [
+"@volksverpetzer/react-native-a11y/has-valid-accessibility-ignores-invert-colors": [
   "error",
   {
     "invertableComponents": [

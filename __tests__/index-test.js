@@ -37,7 +37,7 @@ describe('flat configurations', () => {
     it(`should export a flat '${name}' configuration`, () => {
       assert(plugin.configs.flat[name]);
       assert.equal(
-        plugin.configs.flat[name].plugins['react-native-a11y'],
+        plugin.configs.flat[name].plugins['@volksverpetzer/react-native-a11y'],
         plugin,
       );
     });
